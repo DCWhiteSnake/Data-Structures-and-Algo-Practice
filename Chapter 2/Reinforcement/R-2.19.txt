@@ -1,0 +1,12 @@
+Given that an arithmetic progression adds a fixed constant to one term of the progression to produce the next, this sounds just like the range class in a way, so we can use the formular given  range class  for finding the maximum number of steps i.e., given start, stop and step:
+    max(0, (stop - start + step -1)//step)
+
+so given that;
+start = 0
+stop = 2 ^63
+step = 128
+
+max(0, (math.pow(2, 63)  + 127)//128)
+
+Which give the answer:
+7.205759403792794e+16

@@ -1,0 +1,1 @@
+sum([pow(x,2) for x in range(int(input()) if int(input()) > 0 else False)])

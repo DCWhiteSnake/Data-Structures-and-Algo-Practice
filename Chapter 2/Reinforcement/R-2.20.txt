@@ -1,0 +1,12 @@
+Potential Disadvantages of Having Deep Inheritance trees:
+   1. It can lower the ability of a developer to efficiently manage the code.
+   
+   2. More complex design
+   
+   3. Classes are more likely to exibit defects during testing when they are
+       deeper in the inheritance tree
+   
+   4. Understanding of a single line may require tracing  a chain of method               invocations through several different object classes and  up and down the        object hierarchy to find where the work is really getting done. 
+
+
+Source: A Controlled Experiment on Inheritance Depth as a Cost Factor for Code Maintenance by Lutz Prechelt, Barbara Unger, Michael Philippsen, Walter Tichy.
