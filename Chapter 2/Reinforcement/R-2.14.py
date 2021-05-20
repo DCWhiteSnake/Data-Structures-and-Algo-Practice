@@ -58,11 +58,10 @@ class Vector:
             else:
                 self[x] = 0
 
-    def __mul__(self, number):
-        """Returns a new Vector with coordinates that are 3 times the
-        the respective coordinates of v
+    def __mul__(self, other):
+        """Performs a Scalar product of the vector
 
-        number    number to multiply respective coordinate by
+        other   the other vector
         """
         if isinstance(number, (Vector)):
             result = 0
@@ -71,11 +70,6 @@ class Vector:
             elif len(number) == len(self):
                 for x in range(len(self)):
                     result += number[x] * self[x]
-
-        if isinstance(number, (int)):
-            result = Vector(len(self))
-            for x in range(len(self)):
-                result[x]= number*self[x]
 
         return result
 
