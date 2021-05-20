@@ -80,7 +80,7 @@ if __name__ == '__main__':
     v = Vector(5)
     v[4] = 10
     print(v)
-    x = 5 * v
+    x = v * 5
     print(v)
     print(x)
             
