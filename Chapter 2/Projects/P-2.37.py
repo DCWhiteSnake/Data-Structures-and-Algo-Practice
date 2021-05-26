@@ -8,6 +8,12 @@ class animal:
         """Super class for bear and fish"""
         self._category = category
 
+    def __add__(self, other):
+        if other._category == self._category:
+            return animal(category=self._category)  # How does python create new items of a type
+        elif other._category != self._category:
+            return None
+
     def __str__(self):
         "String representation of the class"
         return self._category
@@ -47,7 +53,7 @@ if __name__ == '__main__':
             if itemcontainsnone == True:
                 break
 
-        if isinstance(item, (list)) and itemcontainsnone == True:
+        if isinstance(item, (list)) and  itemcontainsnone == True:
             none_found = False
             while not none_found:
                 x = random.randint(0, len(item) - 1)
@@ -75,7 +81,7 @@ if __name__ == '__main__':
         motion_decider = random.randint(0, 2)
         if motion_decider == 0 and x < len(ocean):
             if ocean[x] != None:
-                print(str(ocean[x]), "at positon ", [x], " is immobile")
+                print(str(ocean[x]), "at positon ",[x], " is immobile")
             else:
                 print("None")
 
@@ -88,13 +94,13 @@ if __name__ == '__main__':
                 break  # end of loop
 
             if ocean[x] == None:
-                print("nothing to move at position ", [x])
+                print("nothing to move at position ",[x])
                 continue
 
             else:
 
                 if ocean[x + 1] == None:
-                    print(str(ocean[x]), " moves from ", [x], "to ", [x+1])
+                    print(str(ocean[x]), " moves from ", [x], "to ",[x+1])
                     temp = ocean[x]  # temp storage for animal at positon x
                     ocean[x] = None
                     ocean[x+1] = temp
@@ -108,36 +114,40 @@ if __name__ == '__main__':
                         x], "dies, blood goes brrr, bear tummy full")
                     ocean[x] = None
                 elif isinstance(ocean[x], (fish)) and isinstance(ocean[x + 1], (fish)):
-                    print("Mating ensues between fishes at positions",
-                          [x], "and", [x+1])
-                    t = find_none(ocean)
-                    ocean[t] = fish()
-                    print("fish offspring has moved to position", [t])
-
+                    try:
+                        print("Mating ensues between fishes at positions",
+                              [x], "and",[x+1])
+                        t = find_none(ocean)
+                        ocean[t] = ocean[x] + ocean[x + 1]
+                        print("fish offspring has moved to position", [t])
+                    except TypeError:
+                        print("No free space for offspring")
+                    
                     # put a new instance of fish in a random location that is unoccupied
                 elif isinstance(ocean[x], (bears)) and isinstance(ocean[x + 1], (bears)):
                     # put a new instance of bears in a  random location that is unoccupied
-
-                    print("Mating ensues between bears at positions",
-                          [x], "and", [x+1])
-                    t = find_none(ocean)
-                    ocean[t] = bears()
-                    print("bear offspring has moved to position", [t])
+                    try:
+                        print("Mating ensues between bears at positions",
+                              [x], "and",[x+1])
+                        t = find_none(ocean)
+                        ocean[t] = ocean[x] + ocean[x + 1]
+                        print("bear offspring has moved to position", [t])
+                    except TypeError:
+                        continue
 
         elif motion_decider == 2:
             # same as above except move backward
             if x == 0:
                 print("No space to move back to for",
-                      str(ocean[x]), "at positon", [x])
+                      str(ocean[x]), "at positon",[x])
                 pass
 
             elif x < len(ocean) and x != 0:
                 if ocean[x] == None:
-                    print("nothing to move at positon ", [x])
+                    print("nothing to move at positon ",[x])
                     continue
                 elif ocean[x - 1] == None and ocean[x] != None:
-                    print(str(ocean[x]), [
-                          x], " moved 1 step backward to position ", [x-1])
+                    print(str(ocean[x]),[x], " moved 1 step backward to position ",[x-1] )
                     temp = ocean[x]  # temp storage for animal at positon x
                     ocean[x] = None
                     ocean[x-1] = temp
@@ -152,21 +162,25 @@ if __name__ == '__main__':
                     ocean[x] = None
 
                 elif isinstance(ocean[x], (fish)) and isinstance(ocean[x - 1], (fish)):
-
-                    freespace = find_none(ocean)
-                    print("Mating ensues between fishes at positions",
-                          [x], "and", x-1)
-                    ocean[freespace] = fish(family="mackarel")
-                    print("New fish child at positon ", [freespace])
-
+                    try:
+                        freespace = find_none(ocean)
+                        print("Mating ensues between fishes at positions",
+                              [x], "and", x-1)
+                        ocean[freespace] = ocean[x] + ocean[x - 1]
+                        print("New fish child at positon ", [freespace])
+                    except TypeError:
+                        continue
                     # put a new instance of fish in a random location that is unoccupied
                 elif isinstance(ocean[x], (bears)) and isinstance(ocean[x - 1], (bears)):
                     # put a new instance of bears in a  random location that is unoccupied
-                    freespace = find_none(ocean)
-                    print("Mating ensues between bears at positions",
-                          [x], "and", x-1)
-                    ocean[freespace] = bears("brown")
-                    print("New bear child at positon ", [freespace])
+                    try:
+                        freespace = find_none(ocean)
+                        print("Mating ensues between bears at positions",
+                              [x], "and", x-1)
+                        ocean[freespace] = ocean[x] + ocean[x - 1]
+                        print("New bear child at positon ", [freespace])
+                    except TypeError:
+                        print("type")
 
         else:
             print("end")
